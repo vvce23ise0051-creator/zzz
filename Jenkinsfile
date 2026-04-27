@@ -7,6 +7,7 @@ pipeline {
     }
 
     stages {
+
         stage('CHECKOUT') {
             steps {
                 git branch: 'main', url: 'https://github.com/vvce23ise0051-creator/zzz.git'
@@ -15,16 +16,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                dir('demo') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
-        stage('test') {
+        stage('Test') {
             steps {
                 dir('demo') {
                     bat 'mvn test'
                 }
             }
         }
+
     }
 }
